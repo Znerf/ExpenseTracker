@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import axios from 'axios';
@@ -6,7 +6,7 @@ import axios from 'axios';
 @Component({
   selector: 'app-expense-crud',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './expense-crud.component.html',
   styleUrls: ['./expense-crud.component.css']
 })
@@ -14,7 +14,15 @@ export class ExpenseCrudComponent implements OnInit {
   expenses: any[] = [];
   error = '';
   loading = false;
-  form: any = { item: '', amount: '', category: '', date: '', paymentMethod: '' };
+  form: any = {
+    item: '',
+    cost: '',
+    expenseDate: '',
+    category: '',
+    description: '',
+    paymentMethod: '',
+    location: ''
+  };
   editingId: number | null = null;
 
   @Output() onChange = new EventEmitter<void>();
@@ -52,7 +60,15 @@ export class ExpenseCrudComponent implements OnInit {
 
     apiCall
       .then(() => {
-        this.form = { item: '', amount: '', category: '', date: '', paymentMethod: '' };
+        this.form = {
+          item: '',
+          cost: '',
+          expenseDate: '',
+          category: '',
+          description: '',
+          paymentMethod: '',
+          location: ''
+        };
         this.editingId = null;
         this.fetchExpenses();
         this.onChange.emit();
