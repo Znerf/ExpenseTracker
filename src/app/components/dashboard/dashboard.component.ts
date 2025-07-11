@@ -22,6 +22,9 @@ export class DashboardComponent {
     if (typeof window !== 'undefined' && window.localStorage) {
       this.email = localStorage.getItem('email') || '';
       this.token = localStorage.getItem('token') || '';
+      if (this.token == ''){
+        this.logout()
+      }
     }
     if (this.email && this.token) {
       axios.get(`http://localhost:8080/api/logins/by-email`, {
@@ -44,5 +47,11 @@ export class DashboardComponent {
           this.cdr.markForCheck();
         });
     }
+  }
+
+  logout() {
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

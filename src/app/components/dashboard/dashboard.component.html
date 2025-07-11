@@ -1,16 +1,8 @@
-<div>
-  <div  class="dashboard-container">
-    <h2>Dashboard</h2>
-    <p *ngIf="userInfo; else loadingOrError">
-      Welcome, {{ userInfo.firstName || email }}!<br>
-      <span *ngIf="userInfo.lastName">Last Name: {{ userInfo.lastName }}</span><br>
-      <span *ngIf="userInfo.email">Email: {{ userInfo.email }}</span><br>
-      <!-- Add more fields as needed -->
-    </p>
-    <ng-template #loadingOrError>
-      <div *ngIf="error; else loading">{{ error }}</div>
-      <ng-template #loading><span>Loading user info...</span></ng-template>
-    </ng-template>
+<nav class="w-full bg-blue-700 text-white flex items-center justify-between px-4 py-3 mb-6">
+  <div class="font-bold text-lg">Expense Manager</div>
+  <div class="flex items-center gap-4">
+    <span *ngIf="userInfo">Welcome, {{ userInfo.firstName || email }}</span>
+    <button (click)="logout()" class="bg-white text-blue-700 px-3 py-1 rounded hover:bg-blue-100 transition">Logout</button>
   </div>
-  <app-expense-crud>Expense</app-expense-crud>
-</div>
+</nav>
+<app-expense-crud></app-expense-crud>
