@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,12 +11,19 @@ import axios from 'axios';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email = '';
   password = '';
   errorMessage = '';
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onLogin() {
     this.errorMessage = '';
@@ -28,7 +35,11 @@ export class LoginComponent {
         if (response.data && (response.data.error )) {
           this.errorMessage = response.data.error;
         } else {
-          console.log('Login success:', response.data);
+          const { token, email } = response.data;
+          localStorage.setItem('token', token);
+          localStorage.setItem('email', email);
+          console.log('Login success:', { token, email });
+          this.router.navigate(['/dashboard']);
         }
         this.cdr.markForCheck();
       })

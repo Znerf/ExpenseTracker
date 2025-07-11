@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  template: `
+    <div class="dashboard-container">
+      <h2>Dashboard</h2>
+      <p>Welcome, {{ email }}!</p>
+    </div>
+  `,
+  styles: [`
+    .dashboard-container {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 2rem 2.5rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+  `]
+})
+export class DashboardComponent {
+  email = localStorage.getItem('email') || '';
+}
