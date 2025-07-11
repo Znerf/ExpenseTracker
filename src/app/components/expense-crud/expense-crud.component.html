@@ -1,0 +1,39 @@
+<div class="w-full  mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Expenses</h2>
+  <form (ngSubmit)="saveExpense()" class="mb-6 grid grid-cols-1 md:grid-cols-5 gap-2">
+    <input class="border p-2 rounded" [(ngModel)]="form.item" name="item" placeholder="Item" required />
+    <input class="border p-2 rounded" [(ngModel)]="form.amount" name="amount" type="number" placeholder="Amount" required />
+    <input class="border p-2 rounded" [(ngModel)]="form.category" name="category" placeholder="Category" required />
+    <input class="border p-2 rounded" [(ngModel)]="form.date" name="date" type="date" required />
+    <input class="border p-2 rounded" [(ngModel)]="form.paymentMethod" name="paymentMethod" placeholder="Payment Method" required />
+    <button class="col-span-1 md:col-span-5 bg-blue-600 text-white rounded p-2 mt-2" type="submit">
+      {{ editingId ? 'Update' : 'Add' }} Expense
+    </button>
+  </form>
+  <div *ngIf="error" class="text-red-600 mb-2">{{ error }}</div>
+  <table class="w-full bg-white border rounded shadow">
+    <thead>
+      <tr>
+        <th class="p-2 border">Item</th>
+        <th class="p-2 border">Amount</th>
+        <th class="p-2 border">Category</th>
+        <th class="p-2 border">Date</th>
+        <th class="p-2 border">Payment</th>
+        <th class="p-2 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exp of expenses">
+        <td class="p-2 border">{{ exp.item }}</td>
+        <td class="p-2 border">{{ exp.amount }}</td>
+        <td class="p-2 border">{{ exp.category }}</td>
+        <td class="p-2 border">{{ exp.date }}</td>
+        <td class="p-2 border">{{ exp.paymentMethod }}</td>
+        <td class="p-2 border">
+          <button class="text-blue-600 mr-2" (click)="editExpense(exp)">Edit</button>
+          <button class="text-red-600" (click)="deleteExpense(exp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
