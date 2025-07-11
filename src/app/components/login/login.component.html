@@ -11,6 +11,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
   <div class="auth-footer">
     <span>Don't have an account?</span>
     <button (click)="goToSignup()" class="btn btn-link">Sign up</button>
