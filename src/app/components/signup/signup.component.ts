@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { useRegisterMutation } from '../../store/api-slice';
+import axios from 'axios';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +21,7 @@ export class SignupComponent {
   errors: any = {};
   successMessage = '';
 
-  register = useRegisterMutation();
+  constructor(private cdr: ChangeDetectorRef) {}
 
   validate() {
     this.errors = {};
@@ -57,30 +57,36 @@ export class SignupComponent {
   }
 
   onSignup() {
-    this.validate();
     this.successMessage = '';
+    this.errors.api = '';
+    this.validate();
     if (Object.keys(this.errors).length > 0) {
       return;
     }
-    this.register({
+    axios.post('http://localhost:8080/api/logins', {
       firstName: this.firstname,
       lastName: this.lastname,
       email: this.email,
       password: this.password,
       dateOfBirth: this.dob
     })
-      .then((result: any) => {
-        console.log(result)
-        if (result && !result.error) {
-          console.log(result)
-          this.successMessage = 'You can now login.';
+      .then((response) => {
+        if (response.data && response.data.error) {
+          this.errors.api = response.data.error || 'Registration failed. Please try again.';
         } else {
-          console.log(result)
-          this.errors.api = 'Registration failed. Please try again2.';
+          this.successMessage = 'You can now login.';
         }
+        this.cdr.markForCheck();
       })
-      .catch(() => {
-        this.errors.api = 'Registration failed. Please try again.';
+      .catch((error: any) => {
+        if (error.response && error.response.data && error.response.data.message) {
+          this.errors.api = error.response.data.message;
+        } else if (error.message) {
+          this.errors.api = error.message;
+        } else {
+          this.errors.api = 'Registration failed. Please try again.';
+        }
+        this.cdr.markForCheck();
       });
   }
 }
