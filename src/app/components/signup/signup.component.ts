@@ -1,4 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import axios from 'axios';
@@ -10,7 +11,7 @@ import axios from 'axios';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   firstname = '';
   lastname = '';
   dob = '';
@@ -21,7 +22,14 @@ export class SignupComponent {
   errors: any = {};
   successMessage = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   validate() {
     this.errors = {};
