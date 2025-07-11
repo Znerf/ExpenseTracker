@@ -19,6 +19,14 @@ export interface SignupRequest {
   password: string;
 }
 
+export interface RegisterRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  dateOfBirth: string;
+}
+
 export const counterApi = createApi({
   reducerPath: 'counterApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api' }),
@@ -44,7 +52,14 @@ export const counterApi = createApi({
         body,
       }),
     }),
+    register: build.mutation<UserResponse, RegisterRequest>({
+      query: (body) => ({
+        url: 'logins',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetCountQuery, useLoginMutation, useSignupMutation } = counterApi;
+export const { useGetCountQuery, useLoginMutation, useSignupMutation, useRegisterMutation } = counterApi;

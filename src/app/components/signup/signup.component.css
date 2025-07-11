@@ -23,7 +23,8 @@ label {
 }
 input[type="text"],
 input[type="date"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   width: 100%;
   padding: 0.6rem;
   border: 1px solid #ccc;
@@ -54,4 +55,10 @@ input:focus {
   margin-top: 0.2em;
   margin-bottom: -0.7em;
   align-self: flex-start;
+}
+.success-message {
+  color: #388e3c;
+  font-size: 1em;
+  margin-top: 1.2em;
+  font-weight: 500;
 }
