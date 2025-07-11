@@ -1,0 +1,50 @@
+.auth-container {
+  max-width: 350px;
+  margin: 60px auto;
+  padding: 2rem 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+input[type="text"],
+input[type="date"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+input:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+.btn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.btn-primary {
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+}

@@ -1,0 +1,26 @@
+<div class="auth-container">
+  <h2>Sign Up</h2>
+  <form (ngSubmit)="onSignup()" #signupForm="ngForm" class="auth-form">
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input id="firstname" type="text" name="firstname" [(ngModel)]="firstname" required placeholder="Enter your first name" />
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input id="lastname" type="text" name="lastname" [(ngModel)]="lastname" required placeholder="Enter your last name" />
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input id="dob" type="date" name="dob" [(ngModel)]="dob" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" [(ngModel)]="password" required placeholder="Enter your password" />
+    </div>
+    <div class="form-group">
+      <label for="repassword">Re-enter Password</label>
+      <input id="repassword" type="password" name="repassword" [(ngModel)]="repassword" required placeholder="Re-enter your password" />
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+</div>

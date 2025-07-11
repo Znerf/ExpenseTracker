@@ -6,21 +6,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
-  template: `
-    <h2>Login</h2>
-    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-      <label>Email:
-        <input type="email" name="email" [(ngModel)]="email" required />
-      </label>
-      <br />
-      <label>Password:
-        <input type="password" name="password" [(ngModel)]="password" required />
-      </label>
-      <br />
-      <button type="submit">Login</button>
-    </form>
-    <button (click)="goToSignup()">Sign up</button>
-  `,
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email = '';
